@@ -8,6 +8,7 @@
  ********************************************************************/
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -137,7 +138,45 @@ public class ProblemSolutions {
         // TO CODE WITH A SPACE COMPLEXITY OF O(N LOG N), WHICH IS FINE FOR PURPOSES
         // OF THIS PROGRAMMING EXERCISES.
 
-        return;
+        // Initialize a temporary array that will store final merged result
+        int[] temp = new int[right - left + 1];
+
+        // Initialize tracker to store current position of temporary array
+        int current = 0;
+
+        // Without sorting, loop through array
+        for (int i = left; i <= right; i++) {
+
+            // Copy all elements divisible by k into temp array in order of appearance
+            if (arr[i] % k == 0) {
+                temp[current++] = arr[i];
+            }
+        }
+
+        // Initialize array list to store all values indivisible by k
+        List<Integer> nonDivisible = new ArrayList<>();
+
+        // Without sorting, loop through array
+        for (int i = left; i <= right; i++) {
+
+            // Add all elements not divisible by k to array list
+            if (arr[i] % k != 0) {
+                nonDivisible.add(arr[i]);
+            }
+        }
+
+        // Sort the non-divisible elements in ascending order after populating array
+        Collections.sort(nonDivisible);
+
+        // Add sorted non-divisible elements to temporary array
+        for (int val : nonDivisible) {
+            temp[current++] = val;
+        }
+
+        // Copy temporary results back to original array
+        for (int i = 0; i < temp.length; i++) {
+            arr[left + i] = temp[i];
+        }
 
     }
 
