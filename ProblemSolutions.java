@@ -249,7 +249,35 @@ public class ProblemSolutions {
 
         // YOUR CODE GOES HERE, CONSIDER USING ARRAYS.SORT
 
-        return -1;
+        // Sort array from lightest to heaviest weights before traversal
+        Arrays.sort(people);
+
+        // Initialize variable to count number of sleds required
+        int sleds = 0;
+
+        // Initialize pointer to lightest person
+        int lightest = 0;
+
+        // Initialize pointer to heaviest person
+        int heaviest = people.length - 1;
+
+        // Loop through array as long as the lightest person is lighter or equal to heaviest
+        while (lightest <= heaviest) {
+
+            // Pair lightest and heaviest together so long as they don't exceed weight capacity
+            if (people[lightest] + people[heaviest] <= limit) {
+                lightest++;
+            }
+            
+            // Heaviest person will always occupy a sled, move to next heaviest
+            heaviest--;
+
+            // Incremenet sled number per match
+            sleds++;
+        }
+
+        // Return minimum required number of sleds
+        return sleds;
 
     }
 
