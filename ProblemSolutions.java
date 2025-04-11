@@ -8,6 +8,8 @@
  ********************************************************************/
 
 import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProblemSolutions {
 
@@ -68,7 +70,7 @@ public class ProblemSolutions {
 
             // Initialize temporary variable to hold value of current index
             int temp = values[i];
-            
+
             // Copy smallest or largest value to first unsorted element
             values[i] = values[minOrMax];
 
@@ -188,8 +190,28 @@ public class ProblemSolutions {
     public static boolean asteroidsDestroyed(int mass, int[] asteroids) {
 
         // YOUR CODE GOES HERE, CONSIDER USING ARRAYS.SORT()
+        
+        // Sort integer array before traversal
+        Arrays.sort(asteroids);
 
-        return false;
+        // Initialize variable assuming all asteroids are destroyed
+        boolean isDestroyed = true;
+
+        // Loop through sorted array
+        for (int asteroid : asteroids) {
+
+            // If planetary mass is GT or equal to asteroid mass, destroy asteroid and add mass
+            if (mass >= asteroid) {
+                mass += asteroid;
+            
+            // If planetary mass is LT asteroid mass, planet is destroyed, update boolean status 
+            } else {
+                isDestroyed = false;
+            }
+        }
+
+        // Return true if all asteroids are destroyed, false if at least one remains
+        return isDestroyed;
 
     }
 
